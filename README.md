@@ -1,4 +1,4 @@
-# mini-nøtt i Haskell
+# Haskellnøtt
 
 Se kommentarer i [timeseries.hs](./timeseries.hs) for forklaring av oppgaven.
 
