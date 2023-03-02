@@ -1,0 +1,33 @@
+1: true
+2: true
+3: false
+4: false
+
+
+data1.txt:
+TimeRange {start = 1, end = 15}
+TimeRange {start = 32, end = 61}
+
+Sykmeldt i 15 dager, opphold i 16 dager (innafor), sykmeldt i 29 dager.
+Totalt 61 dager som er mer enn 6 uker, uten noen for store opphold.
+
+data2.txt:
+TimeRange {start = 1, end = 10},
+TimeRange {start = 20, end = 30},
+TimeRange {start = 40, end = 50},
+TimeRange {start = 60, end = 70}
+
+Kun 10 dagers sykeperioder med 9-dagers opphold.
+
+data3.txt:
+TimeRange {start = 1, end = 15},
+TimeRange {start = 33, end = 61}
+
+Sykmeldt i 15 dager, opphold i 17 dager (uttafor), sykmeldt i 28 dager.
+Totalt 61 dager med opphold over 16 dager.
+
+data4.txt
+TimeRange {start = 1, end = 5},
+TimeRange {start = 23, end = 25}
+
+Sykmeldt i 5 dager, så opphold på 17 dager. Men hele sykmeldingsløpet er under 6 uker.

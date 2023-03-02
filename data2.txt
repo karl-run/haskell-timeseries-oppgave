@@ -1,0 +1,6 @@
+[
+    TimeRange {start = 1, end = 10},
+    TimeRange {start = 20, end = 30},
+    TimeRange {start = 40, end = 50},
+    TimeRange {start = 60, end = 70}
+]
