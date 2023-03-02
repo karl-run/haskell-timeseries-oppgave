@@ -1,4 +1,4 @@
-import Distribution.Simple.CCompiler (filenameCDialect)
+import Debug.Trace (traceShow)
 import Text.Read (readEither)
 
 -- Dager er inklusive i begge ender
@@ -9,6 +9,17 @@ data TimeRange = TimeRange
   }
   deriving (Show, Read, Eq)
 
+distanceBetween :: TimeRange -> TimeRange -> Int
+distanceBetween (TimeRange _ end1) (TimeRange start2 _) = (start2 - end1) - 1
+
+rangeLength :: TimeRange -> Int
+rangeLength (TimeRange start end) = end - start + 1
+
+toLengthGap :: [TimeRange] -> [(Int, Int)]
+toLengthGap [] = []
+toLengthGap [x] = [(rangeLength x, 0)]
+toLengthGap (x : xs) = (rangeLength x, distanceBetween x (head xs)) : toLengthGap xs
+
 -- Vi lurer på om personen har vært sykmeldt i 6 uker eller mer (42 dager)
 -- UTEN et opphold på 16 dager eller mer.
 --
@@ -18,7 +29,17 @@ data TimeRange = TimeRange
 -- Syk i 10 dager, frisk i 10, syk i 10, frisk i 10, syk i 10 er et reknet
 --   som "sammenhengende" syk i 50 dager, med ingen opphold over 16 dager = true
 continuouslySick :: Int -> Int -> [TimeRange] -> Bool
-continuouslySick weeks allowedGap _ = False
+continuouslySick weeks allowedGap periods = totalDays >= weeks * 7
+  where
+    lengthDistanceTuples :: [(Int, Int)]
+    lengthDistanceTuples = toLengthGap periods
+
+    continuousPeriods :: [(Int, Int)] -> [(Int, Int)]
+    continuousPeriods [] = []
+    continuousPeriods [x] = [x | fst x <= allowedGap]
+    continuousPeriods (x : y : xs) = if snd x > allowedGap then continuousPeriods xs else x : y : continuousPeriods xs
+
+    totalDays = sum $ map (uncurry (+)) $ continuousPeriods lengthDistanceTuples
 
 hasBeencontinuouslySickFor6Weeks :: [TimeRange] -> Bool
 hasBeencontinuouslySickFor6Weeks = continuouslySick 6 16
