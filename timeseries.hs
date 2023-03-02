@@ -1,4 +1,3 @@
-import Distribution.Simple.CCompiler (filenameCDialect)
 import Text.Read (readEither)
 
 -- Dager er inklusive i begge ender
