@@ -12,8 +12,8 @@ data TimeRange = TimeRange
 -- UTEN et opphold på 16 dager eller mer.
 --
 -- F.eks:
--- Sykmeldt i 30 dager, også friskmeldt i 14 dager, også sykmeldt i 30 dager = true
--- Sykmeldt i 30 dager, også friskmeldt i 16 dager, også sykmeldt i 30 dager = false
+-- Sykmeldt i 30 dager, også friskmeldt i 16 dager, også sykmeldt i 30 dager = true
+-- Sykmeldt i 30 dager, også friskmeldt i 17 dager, også sykmeldt i 30 dager = false
 -- Syk i 10 dager, frisk i 10, syk i 10, frisk i 10, syk i 10 er et reknet
 --   som "sammenhengende" syk i 50 dager, med ingen opphold over 16 dager = true
 continuouslySick :: Int -> Int -> [TimeRange] -> Bool
